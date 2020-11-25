@@ -164,6 +164,10 @@ public class BaseServer implements RxBleServer, RxBleServerMapper {
                             .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
                             .build();
 
+                    AdvertiseData scanResponse = new AdvertiseData.Builder()
+                            .setIncludeDeviceName(true)
+                            .build();
+
                     AdvertiseData data = new AdvertiseData.Builder()
                             .setIncludeDeviceName(false)
                             .setIncludeTxPowerLevel(false)
@@ -172,7 +176,7 @@ public class BaseServer implements RxBleServer, RxBleServerMapper {
 
                     AdvertiseCallback callback = createAdvertisingCallback(advertiser, emitter);
 
-                    advertiser.startAdvertising(settings, data, callback);
+                    advertiser.startAdvertising(settings, data, scanResponse, callback);
                 }));
     }
 
